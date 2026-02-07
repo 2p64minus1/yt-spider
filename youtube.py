@@ -12,6 +12,7 @@ from PyQt5.QtGui import QPixmap, QPalette, QCloseEvent
 import yt_dlp
 import requests
 from io import BytesIO
+#兼容防止报错
 if sys.platform == "win32":
     import ctypes
 
@@ -39,6 +40,7 @@ class DisclaimerDialog(QDialog):
         self.init_ui()
 
     def init_ui(self):
+        #一定要看免责声明啊
         self.setWindowTitle("免责声明")
         self.setFixedSize(600, 400)
 
@@ -268,7 +270,7 @@ class ScrollableLabel(QWidget):
         scroll_width = self.scroll_area.width() - 10  # 减去边距
 
         if text_width > scroll_width:
-            # 文本过长，需要滚动
+            # 文本过长，需要滚动，自动或手动滚动
             if self.animation:
                 self.animation.stop()
 
@@ -586,7 +588,7 @@ class YouTubeDownloader(QMainWindow):
         self.log_message(f"当前版本: {self.version}")
         self.log_message(f"日志文件: {log_file}")
 
-        # 检查ffmpeg
+        # 检查ffmpeg是否存在
         self.check_ffmpeg()
 
     def check_ffmpeg(self):
@@ -808,9 +810,11 @@ def main():
         sys.exit(result)
 
     except Exception as e:
+        #具体问题的报错
         logging.error(f"程序运行出错: {e}")
         sys.exit(1)
 
 
 if __name__ == '__main__':
+
     main()
